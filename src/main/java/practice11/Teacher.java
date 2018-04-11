@@ -1,6 +1,9 @@
 package practice11;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Teacher extends Person {
@@ -71,12 +74,15 @@ public class Teacher extends Person {
     if (classes.size() == 0) {
       return super.introduce() + " I am a Teacher. I teach No Class.";
     } else {
-      String klassNums = "";
-      for (Klass klass : classes) {
-        klassNums = klassNums + klass.getNumber() + ", ";
-      }
-      klassNums = klassNums.substring(0, klassNums.length() - 2);
-      return super.introduce() + " I am a Teacher. I teach Class " + klassNums + ".";
+      String klassNums="";
+      List<Integer> klassNumList=new ArrayList<>();
+      for(Klass klass:classes)
+        klassNumList.add(klass.getNumber());
+      Collections.sort(klassNumList);
+      for(int num:klassNumList)
+        klassNums= klassNums+num+", ";
+      klassNums=klassNums.substring(0,klassNums.length()-2);
+      return super.introduce()+" I am a Teacher. I teach Class "+klassNums+".";
     }
   }
 

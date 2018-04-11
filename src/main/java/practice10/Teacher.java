@@ -1,5 +1,7 @@
 package practice10;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,8 +73,12 @@ public class Teacher extends Person{
     }
     else {
       String klassNums="";
+      List<Integer> klassNumList=new ArrayList<>();
       for(Klass klass:classes)
-        klassNums= klassNums+klass.getNumber()+", ";
+        klassNumList.add(klass.getNumber());
+      Collections.sort(klassNumList);
+      for(int num:klassNumList)
+        klassNums= klassNums+num+", ";
       klassNums=klassNums.substring(0,klassNums.length()-2);
       return super.introduce()+" I am a Teacher. I teach Class "+klassNums+".";
     }

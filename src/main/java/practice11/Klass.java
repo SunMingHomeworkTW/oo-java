@@ -35,8 +35,6 @@ public class Klass {
     if (members.contains(student)) {
       leader = student;
       notifyAll(student.getName() + " become Leader of " + getDisplayName());
-//      if (teacher!=null)
-//        System.out.print("I am "+ teacher.getName()+". I know "+student.getName()+" become Leader of "+getDisplayName()+".\n");
     } else {
       System.out.print("It is not one of us.\n");
     }
@@ -45,7 +43,6 @@ public class Klass {
   public void appendMember(Student student) {
     members.add(student);
     notifyAll(student.getName() + " has joined " + getDisplayName());
-//      System.out.print("I am "+ teacher.getName()+". I know "+student.getName()+" has joined "+getDisplayName()+".\n");
   }
 
   public List<Student> getMembers() {
