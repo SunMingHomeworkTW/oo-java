@@ -3,31 +3,32 @@ package practice11;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Teacher extends Person{
+public class Teacher extends Person {
+
   private int id;
   private String name;
   private int age;
   private Set<Klass> classes;
 
   public Teacher() {
-    classes=new HashSet<>();
+    classes = new HashSet<>();
   }
 
   public Teacher(int id, String name, int age) {
-    super(id,name,age);
+    super(id, name, age);
     this.name = name;
     this.age = age;
-    classes=new HashSet<>();
+    classes = new HashSet<>();
   }
 
-  public Teacher(int id,String name, int age, Set<Klass> classes) {
-    super(id,name,age);
-    this.id=id;
-    this.name=name;
-    this.age=age;
-    this.classes=classes;
-    for(Klass klass:classes){
-      klass.setTeacher(this);
+  public Teacher(int id, String name, int age, Set<Klass> classes) {
+    super(id, name, age);
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.classes = classes;
+    for (Klass klass : classes) {
+      klass.addAttach(this);
     }
   }
 
@@ -67,27 +68,33 @@ public class Teacher extends Person{
 
   @Override
   public String introduce() {
-    if(classes.size()==0){
-      return super.introduce()+" I am a Teacher. I teach No Class.";
-    }
-    else {
-      String klassNums="";
-      for(Klass klass:classes)
-        klassNums= klassNums+klass.getNumber()+", ";
-      klassNums=klassNums.substring(0,klassNums.length()-2);
-      return super.introduce()+" I am a Teacher. I teach Class "+klassNums+".";
+    if (classes.size() == 0) {
+      return super.introduce() + " I am a Teacher. I teach No Class.";
+    } else {
+      String klassNums = "";
+      for (Klass klass : classes) {
+        klassNums = klassNums + klass.getNumber() + ", ";
+      }
+      klassNums = klassNums.substring(0, klassNums.length() - 2);
+      return super.introduce() + " I am a Teacher. I teach Class " + klassNums + ".";
     }
   }
 
-  public String introduceWith(Student student){
-    return super.introduce()+" I am a Teacher. I "+(isTeaching(student)?"":"don't ")+"teach "+student.getName()+".";
+  public String introduceWith(Student student) {
+    return super.introduce() + " I am a Teacher. I " + (isTeaching(student) ? "" : "don't ")
+        + "teach " + student.getName() + ".";
   }
 
-  public boolean isTeaching(Student student){
-    for(Klass klass:classes){
-      if (klass==student.getKlass())
+  public boolean isTeaching(Student student) {
+    for (Klass klass : classes) {
+      if (klass == student.getKlass()) {
         return true;
+      }
     }
     return false;
+  }
+
+  public void update(String msg) {
+    System.out.print("I am " + name + ". I know " + msg + ".\n");
   }
 }
